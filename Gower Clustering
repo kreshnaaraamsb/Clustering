@@ -2,7 +2,7 @@ library(readxl)
 library(vegan)
 
 #data input
-data_final <- read_excel("~/Work_Files/8E/data_final.xlsx")
+data_final <- read_excel("~/data_final.xlsx")
 
 
 #seed
