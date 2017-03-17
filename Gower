@@ -1,0 +1,23 @@
+library(readxl)
+library(vegan)
+
+#data input
+data_final <- read_excel("~/Work_Files/8E/data_final.xlsx")
+
+
+#seed
+set.seed(20)
+
+#Creating Gower matrix distance for binary variables. This is from package Vegan.
+#this can aslo be created using daisy() in cluster package and from gower.dist() in StatMatch package.
+#Gower distance can also be used for mixed type variables when clustering.When Calculated for only continuous
+#it results in metric as close as what we get from euclidean distance.
+
+gow.mat <- vegdist(data_final[,32:39], method="gower")
+
+#passing the gower matrix as input
+clusters_1 <- pam(x = gow.mat, k = 7, diss = TRUE)
+
+#output
+data_final<-cbind(data_final,clusters_1$clustering)
+write.csv(data_final,"output.csv")
